@@ -97,5 +97,8 @@ public class TaskList {
         return foundItems;
     }
 
+    public void snoozeItem(int index){
+        tasks.get(index).getDate();
+    }
 
 }

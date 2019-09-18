@@ -53,7 +53,17 @@ public class Parser {
                     //create event object
                     Event t = new Event(dateInfo[0], dateInfo[1]);
                     return new AddCommand(t);
-                } else {
+                } else if (taskInfo[0].equals("snooze")){
+                    if ((taskInfo.length < 2) || !(taskInfo[1].trim().length() > 0)) { throw new DukeException(DukeException.ErrorType.FORMAT_SNOOZE); }
+                    String[] dateInfo = parseDate("snooze", taskInfo);
+                    if ((Arrays.toString(dateInfo).equals("[null]") || (dateInfo.length < 2))) { throw new DukeException(DukeException.ErrorType.FORMAT_SNOOZE); }
+                    Date d = new Date();
+                    dateInfo[1] = d.convertDate(dateInfo[1]);
+                    if (dateInfo[1].equals("[null]")) { throw new DukeException(DukeException.ErrorType.FORMAT_SNOOZE); }
+
+                    return new SnoozeCommand(dateInfo[0], dateInfo[1]);
+                }
+                else {
                     try {
                         throw new DukeException(DukeException.ErrorType.COMMAND_INVALID);
                     } catch (DukeException e){
@@ -77,6 +87,9 @@ public class Parser {
         } else if (type.equals("event")) {
             dateInfo = taskInfo[1].split("/at ");
             //tell AddCommand to go add itself
+        }
+        else{
+            dateInfo = taskInfo[1].split("/to ");
         }
         return dateInfo;
     }

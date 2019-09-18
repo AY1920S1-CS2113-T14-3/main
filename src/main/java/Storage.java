@@ -56,8 +56,10 @@ public class Storage {
         try {
             fw = new FileWriter(file, append);
             bw = new BufferedWriter(fw);
+
             bw.write(s);
             bw.newLine();
+
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -87,8 +89,10 @@ public class Storage {
             }
             oldContent = oldContent.substring(0, oldContent.length() - 1);
             String newContent = oldContent.replace(oldString + System.lineSeparator(), "");
+
             Storage writer = new Storage();
             writer.writeFile(newContent, false);
+
 
         } catch (IOException e) {
             e.printStackTrace();

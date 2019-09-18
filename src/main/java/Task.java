@@ -88,5 +88,7 @@ public class Task {
         return getType() + " | " + getStatus() + " | " + getDescription();
     }
 
-
+    public void modifyDate(String date){
+        this.date = date;
+    }
 }
