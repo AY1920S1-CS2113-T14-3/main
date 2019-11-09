@@ -51,7 +51,6 @@ public class Storage {
         File currentDir = new File(System.getProperty("user.dir"));
         File filePath = new File(currentDir.toString() + "\\data");
         File dataText = new File(filePath, "wordup.txt");
-        File dataExcel = new File(filePath, "wordup.xlsx");
         if (!filePath.exists()) {
             filePath.mkdir();
         }
@@ -63,6 +62,7 @@ public class Storage {
             }
         }
         FILE_PATH = dataText.getAbsolutePath();
+        File dataExcel = new File(filePath, "wordup.xlsx");
         EXCEL_PATH = dataExcel.getAbsolutePath();
         excelFile = new File(EXCEL_PATH);
     }
@@ -173,8 +173,7 @@ public class Storage {
      * Writes the data to excel file.
      * @param bank represents the data bank
      */
-    public void
-    writeExcelFile(Bank bank) {
+    public void writeExcelFile(Bank bank) {
         writeWordBankExcelFile(bank.getWordBankObject(), 0);
         writeTagBankExcelFile(bank.getTagBank());
     }

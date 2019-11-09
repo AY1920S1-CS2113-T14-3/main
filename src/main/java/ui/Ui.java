@@ -147,13 +147,20 @@ public class Ui {
         return stringBuilder.toString();
     }
 
+    /**
+     * Show search result.
+     * @param description word itself
+     * @param meaning meaning or word
+     * @param example example usage of word
+     * @return meaning and example usage, if any.
+     */
     public String showSearch(String description, String meaning, String example) {
-//        if (example.equals(null)) {
-//            return ("Here is the meaning of " + description + ": " + meaning + "\n");
-//        } else {
+        if (example.equals(null)) {
+            return ("Here is the meaning of " + description + ": " + meaning + "\n");
+        } else {
             return ("Here is the meaning of " + description + ": " + meaning + ",\n" +
                     "Here is the example usage:" + example);
-//        }
+        }
     }
 
     /**

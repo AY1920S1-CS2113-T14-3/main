@@ -1,10 +1,6 @@
 package dictionary;
 
-import exception.NoTagFoundException;
-import exception.NoWordFoundException;
-import exception.WordAlreadyExistsException;
-import exception.WordBankEmptyException;
-import exception.WordCountEmptyException;
+import exception.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -55,6 +51,7 @@ public class Bank {
     public Word getWordFromExampleBank(String word) throws NoWordFoundException {
         return exampleBank.getWord(word);
     }
+
     public TagBank getTagBank() {
         return tagBank;
     }
@@ -170,6 +167,11 @@ public class Bank {
         return wordBank.searchWordMeaning(searchTerm);
     }
 
+    /**
+     * search a wordBank named example bank.
+     * @param searchTerm word to be searched
+     * @return example sentence of a word or error message
+     */
     public String searchExampleBank(String searchTerm) {
         try {
             return exampleBank.searchWordMeaning(searchTerm);
