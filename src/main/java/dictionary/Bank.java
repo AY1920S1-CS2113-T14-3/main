@@ -100,7 +100,7 @@ public class Bank {
     }
 
     public void addWordToExampleBank(Word word) throws WordAlreadyExistsException {
-        exampleBank.addWord(word);
+        this.exampleBank.addExample(word);
     }
 
     /**

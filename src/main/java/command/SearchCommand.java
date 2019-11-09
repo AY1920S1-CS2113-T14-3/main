@@ -27,7 +27,7 @@ public class SearchCommand extends Command {
     public String execute(Ui ui, Bank bank, Storage storage) {
         try {
             String example = bank.searchExampleBank(this.searchTerm);
-            //String example = null;
+            System.out.println(example);
             String meaning = bank.searchWordBankForMeaning(this.searchTerm);
             bank.increaseSearchCount(searchTerm);
             return ui.showSearch(this.searchTerm, meaning, example);

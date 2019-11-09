@@ -3,13 +3,7 @@ package ui;
 import dictionary.Word;
 import dictionary.WordCount;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.TreeMap;
-import java.util.Map;
-import java.util.Stack;
-
-import java.util.Date;
+import java.util.*;
 
 /**
  * Represents the object that displays prompts and feedback from the system to the user's commands.
@@ -155,12 +149,13 @@ public class Ui {
      * @return meaning and example usage, if any.
      */
     public String showSearch(String description, String meaning, String example) {
-        if (example.equals(null)) {
-            return ("Here is the meaning of " + description + ": " + meaning + "\n");
-        } else {
+//        System.out.println(example);
+//        if (example.equals(null)) {
+//            return ("Here is the meaning of " + description + ": " + meaning + "\n");
+//        } else {
             return ("Here is the meaning of " + description + ": " + meaning + ",\n" +
                     "Here is the example usage:" + example);
-        }
+//        }
     }
 
     /**

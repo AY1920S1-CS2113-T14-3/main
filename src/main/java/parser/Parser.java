@@ -2,29 +2,7 @@ package parser;
 
 import command.*;
 import dictionary.Word;
-
-import exception.CommandInvalidException;
-import exception.EmptyTagException;
-import exception.EmptyWordException;
-import exception.InvalidCharacterException;
-import exception.InvalidHistoryIndexException;
-import exception.ReminderWrongDateFormatException;
-import exception.WordUpException;
-import exception.WrongAddFormatException;
-import exception.WrongAddSynonymFormatException;
-import exception.WrongAddTagFormatException;
-import exception.WrongDeleteFormatException;
-import exception.WrongEditFormatException;
-import exception.WrongHistoryFormatException;
-import exception.WrongListFormatException;
-import exception.WrongListTagFormatException;
-import exception.WrongQuizFormatException;
-import exception.WrongReminderFormatException;
-import exception.WrongSearchBeginFormatException;
-import exception.WrongSearchFormatException;
-import exception.WrongSearchFrequencyFormatException;
-import exception.WrongSearchTagFormatException;
-import exception.ZeroHistoryRequestException;
+import exception.*;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -446,18 +424,18 @@ public class Parser {
         return new QuizCommand();
     }
 
-    protected static Command parseAddExample(String[] taskInfo) throws WrongAddFormatException,
+    protected static Command parseAddExample(String[] taskInfo) throws WrongAddExampleFormatException,
             EmptyWordException, EmptyTagException, InvalidCharacterException {
         if (taskInfo.length == 1) {
-            throw new WrongAddFormatException();
+            throw new WrongAddExampleFormatException();
         }
         String[] wordDetail = taskInfo[1].split("w/");
         if (wordDetail.length != 2) {
-            throw new WrongAddFormatException();
+            throw new WrongAddExampleFormatException();
         }
         wordDetail = wordDetail[1].split("e/");
         if (wordDetail.length != 2) {
-            throw new WrongAddFormatException();
+            throw new WrongAddExampleFormatException();
         }
         String wordDescription = wordDetail[0].trim();
         if (wordDescription.length() == 0) {
@@ -466,31 +444,10 @@ public class Parser {
         if (!isValidInputWord(wordDescription)) {
             throw new InvalidCharacterException();
         }
-        String[] meaningAndTag = wordDetail[1].split("t/");
-        String meaning = meaningAndTag[0].trim();
-        if (!isValidInputWord(meaning)) {
-            throw new InvalidCharacterException();
-        }
-        if (meaning.length() == 0) {
-            throw new EmptyWordException();
-        }
+        String meaning = wordDetail[1].trim();
         Word word;
-        if (meaningAndTag.length > 1) {
-            HashSet<String> tags = new HashSet<>();
-            for (int j = 1; j < meaningAndTag.length; ++j) {
-                if (meaningAndTag[j].trim().length() == 0) {
-                    throw new EmptyTagException();
-                }
-                if (isValidInputWord(meaningAndTag[j])) {
-                    tags.add(meaningAndTag[j]);
-                } else {
-                    throw new InvalidCharacterException();
-                }
-            }
-            word = new Word(wordDescription, meaning, tags);
-        } else {
-            word = new Word(wordDescription, meaning);
-        }
+        word = new Word(wordDescription, meaning);
+
         return new AddExampleCommand(word);
     }
 

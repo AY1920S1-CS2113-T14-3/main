@@ -61,9 +61,13 @@ public class WordBank {
      * @throws WordAlreadyExistsException if the word has already exists in the WordBank
      */
     public void addWord(Word word) throws WordAlreadyExistsException {
-        if (wordBank.containsKey(word.getWordString())) {
+        if (this.wordBank.containsKey(word.getWordString())) {
             throw new WordAlreadyExistsException(word.getWordString());
         }
+        this.wordBank.put(word.getWordString(), word);
+    }
+
+    public void addExample(Word word) {
         this.wordBank.put(word.getWordString(), word);
     }
 
